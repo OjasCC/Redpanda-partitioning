@@ -1,0 +1,33 @@
+=== EXPERIMENT 1: PARTITION COUNT VS THROUGHPUT ===
+
+Testing with 1 partition(s)...
+  Partitions : 1
+  Time       : 1.19s
+  Msgs/sec   : 4196
+  MB/sec     : 4.10
+
+Testing with 3 partition(s)...
+  Partitions : 3
+  Time       : 0.95s
+  Msgs/sec   : 5263
+  MB/sec     : 5.14
+
+Testing with 6 partition(s)...
+  Partitions : 6
+  Time       : 1.36s
+  Msgs/sec   : 3679
+  MB/sec     : 3.59
+
+Testing with 12 partition(s)...
+  Partitions : 12
+  Time       : 1.36s
+  Msgs/sec   : 3685
+  MB/sec     : 3.60
+
+=== SUMMARY ===
+Partitions   Time(s)    Msgs/sec     MB/sec    
+---------------------------------------------
+1            1.19       4196         4.10      
+3            0.95       5263         5.14      
+6            1.36       3679         3.59      
+12           1.36       3685         3.60      

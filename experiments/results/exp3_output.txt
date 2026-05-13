@@ -1,0 +1,26 @@
+=== SCENARIO A: SKEWED (fixed key → same partition) ===
+Time       : 0.80s
+Msgs/sec   : 3754
+Distribution:
+  Partition 1:  3000 msgs (100.0%)  ████████████████████████████████████████████████████████████████████████████████████████████████████
+
+=== SCENARIO B: EVEN (varied keys → spread across partitions) ===
+Time       : 0.73s
+Msgs/sec   : 4107
+Distribution:
+  Partition 0:   973 msgs ( 32.4%)  ████████████████████████████████
+  Partition 1:   991 msgs ( 33.0%)  █████████████████████████████████
+  Partition 2:  1036 msgs ( 34.5%)  ██████████████████████████████████
+
+=== COMPARISON SUMMARY ===
+Scenario   Time(s)    Msgs/sec     Hot Partition  
+--------------------------------------------------
+Skewed     0.80       3754         P1: 3000 msgs
+Even       0.73       4107         P2: 1036 msgs
+
+Throughput gain from even distribution: 9.4%
+
+Key Insight:
+Skewed keys → one Seastar shard handles everything
+Even keys   → work spread across all shards
+Thread-per-core cannot rebalance automatically

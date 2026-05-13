@@ -1,0 +1,76 @@
+version: '3.7'
+services:
+
+  redpanda-1:
+    image: docker.redpanda.com/redpandadata/redpanda:latest
+    container_name: redpanda-1
+    command:
+      - redpanda
+      - start
+      - --smp 1
+      - --memory 512M
+      - --reserve-memory 0M
+      - --overprovisioned
+      - --node-id 0
+      - --check=false
+      - --kafka-addr 0.0.0.0:9092
+      - --advertise-kafka-addr localhost:9092
+      - --rpc-addr 0.0.0.0:33145
+      - --advertise-rpc-addr redpanda-1:33145
+    ports:
+      - "9092:9092"
+      - "9644:9644"
+    networks:
+      - redpanda-net
+
+  redpanda-2:
+    image: docker.redpanda.com/redpandadata/redpanda:latest
+    container_name: redpanda-2
+    command:
+      - redpanda
+      - start
+      - --smp 1
+      - --memory 512M
+      - --reserve-memory 0M
+      - --overprovisioned
+      - --node-id 1
+      - --check=false
+      - --kafka-addr 0.0.0.0:9093
+      - --advertise-kafka-addr localhost:9093
+      - --rpc-addr 0.0.0.0:33146
+      - --advertise-rpc-addr redpanda-2:33146
+      - --seeds redpanda-1:33145
+    ports:
+      - "9093:9093"
+    networks:
+      - redpanda-net
+    depends_on:
+      - redpanda-1
+
+  redpanda-3:
+    image: docker.redpanda.com/redpandadata/redpanda:latest
+    container_name: redpanda-3
+    command:
+      - redpanda
+      - start
+      - --smp 1
+      - --memory 512M
+      - --reserve-memory 0M
+      - --overprovisioned
+      - --node-id 2
+      - --check=false
+      - --kafka-addr 0.0.0.0:9094
+      - --advertise-kafka-addr localhost:9094
+      - --rpc-addr 0.0.0.0:33147
+      - --advertise-rpc-addr redpanda-3:33147
+      - --seeds redpanda-1:33145
+    ports:
+      - "9094:9094"
+    networks:
+      - redpanda-net
+    depends_on:
+      - redpanda-1
+
+networks:
+  redpanda-net:
+    driver: bridge
