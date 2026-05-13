@@ -2,6 +2,7 @@
 
 **Course:** Big Data Engineering  
 **Student:** Harsh Jethwani  
+             Ojas Gupta
 **System:** Redpanda — Partitioning Subsystem  
 **Source:** [github.com/redpanda-data/redpanda](https://github.com/redpanda-data/redpanda) (cloned locally)  
 **Environment:** Ubuntu 26.04 LTS on WSL2 (Windows 11) | Redpanda v26.1.7-1 | Python 3.14
