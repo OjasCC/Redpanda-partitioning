@@ -1,1 +1,0 @@
-print('consumer placeholder')
